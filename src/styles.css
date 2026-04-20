@@ -1,0 +1,190 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-lime: var(--lime);
+  --color-coral: var(--coral);
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Bold off-white / lime / coral — bright editorial palette */
+  --background: oklch(0.97 0.01 95);
+  --foreground: oklch(0.15 0.01 270);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.01 270);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.01 270);
+
+  --primary: oklch(0.15 0.01 270);
+  --primary-foreground: oklch(0.97 0.01 95);
+
+  --secondary: oklch(0.93 0.02 95);
+  --secondary-foreground: oklch(0.15 0.01 270);
+
+  --muted: oklch(0.93 0.015 95);
+  --muted-foreground: oklch(0.45 0.01 270);
+
+  --accent: oklch(0.86 0.18 125); /* lime */
+  --accent-foreground: oklch(0.15 0.01 270);
+
+  --destructive: oklch(0.62 0.22 22);
+  --destructive-foreground: oklch(0.97 0.006 270);
+
+  --border: oklch(0.15 0.01 270 / 12%);
+  --input: oklch(0.15 0.01 270 / 12%);
+  --ring: oklch(0.86 0.18 125);
+
+  --lime: oklch(0.86 0.18 125);
+  --coral: oklch(0.72 0.2 25);
+
+  --gradient-bright: linear-gradient(135deg, oklch(0.86 0.18 125), oklch(0.92 0.14 100));
+  --gradient-coral: linear-gradient(135deg, oklch(0.72 0.2 25), oklch(0.78 0.15 50));
+  --shadow-brutal: 4px 4px 0 0 oklch(0.15 0.01 270);
+  --shadow-brutal-sm: 2px 2px 0 0 oklch(0.15 0.01 270);
+  --shadow-soft: 0 8px 32px -8px oklch(0.15 0.01 270 / 0.15);
+}
+
+.dark {
+  --background: oklch(0.13 0.012 270);
+  --foreground: oklch(0.97 0.006 270);
+  --card: oklch(0.17 0.014 270);
+  --card-foreground: oklch(0.97 0.006 270);
+  --secondary: oklch(0.22 0.018 270);
+  --secondary-foreground: oklch(0.97 0.006 270);
+  --muted: oklch(0.22 0.014 270);
+  --muted-foreground: oklch(0.65 0.018 270);
+  --border: oklch(1 0 0 / 10%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--lime);
+    color: var(--foreground);
+  }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.15 0.01 270 / 0.2);
+    border-radius: 999px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+  }
+  .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  .brutal {
+    border: 1.5px solid var(--foreground);
+    box-shadow: var(--shadow-brutal);
+  }
+  .brutal-sm {
+    border: 1.5px solid var(--foreground);
+    box-shadow: var(--shadow-brutal-sm);
+  }
+  .brutal-hover {
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .brutal-hover:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 var(--foreground);
+  }
+  .brutal-hover:active {
+    transform: translate(0, 0);
+    box-shadow: 2px 2px 0 0 var(--foreground);
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity: 0.6;
+    mix-blend-mode: multiply;
+  }
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj7aUUM.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/jetbrainsmono/v18/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmUsaaDhw.woff2") format("woff2");
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes bar {
+  0%, 100% { height: 30%; }
+  50% { height: 100%; }
+}
+
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 8s linear infinite; }
+.eq-bar { animation: bar 0.8s ease-in-out infinite; }
+.eq-bar:nth-child(2) { animation-delay: 0.2s; }
+.eq-bar:nth-child(3) { animation-delay: 0.4s; }
